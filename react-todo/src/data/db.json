@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "task": "Go to market",
+      "isCompleted": false
+    },
+    {
+      "id": "2",
+      "task": "Go to Home",
+      "isCompleted": true
+    },
+    {
+      "id": "3",
+      "task": "Go to School",
+      "isCompleted": false
+    }
+  ]
+}
