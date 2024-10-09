@@ -1,11 +1,11 @@
 import React from "react";
 import Todo from "./Todo";
 
-function TodoList({ todos }) {
+function TodoList({ todos, markTodoCompleted }) {
   return (
     <div>
       {todos?.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
+        <Todo key={todo.id} todo={todo} markTodoCompleted={markTodoCompleted} />
       ))}
     </div>
   );

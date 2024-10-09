@@ -6,6 +6,7 @@ import TodoList from "./components/TodoList";
 function App() {
   const [todos, setTodos] = useState([]);
 
+  /////////////////////////////////
   const handleAddTodo = function (task) {
     const newTask = {
       id: uuid(),
@@ -26,6 +27,32 @@ function App() {
     console.log(newTask);
   };
 
+  const handleMarkTodoCompleted = function (id) {
+    const [completedTodo] = todos.filter((todo) => todo.id === id);
+    completedTodo.isCompleted = !completedTodo.isCompleted;
+
+    console.log(completedTodo);
+
+    fetch(`http://localhost:3000/todos/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ isCompleted: !completedTodo.isCompleted }),
+    })
+      .then(() => {
+        setTodos((prev) => {
+          return prev.map((todo) => {
+            if (todo.id === id) return completedTodo;
+            else return todo;
+          });
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  /////////////////////////////////
+
   useEffect(() => {
     const fetchData = async function () {
       try {
@@ -45,7 +72,7 @@ function App() {
       <Search addTodo={handleAddTodo} />
 
       <div className="p-10 pt-5 flex-grow overflow-auto">
-        <TodoList todos={todos} />
+        <TodoList todos={todos} markTodoCompleted={handleMarkTodoCompleted} />
       </div>
     </main>
   );
