@@ -13,9 +13,18 @@ body{
   align-items: center;
   justify-content: center;
   height: 100vh;
+  font-family: Helvetica, sans-serif;
   background-image: linear-gradient(to right, #ffe259, #ffa751);
 }
 
 h1{
   margin-bottom: 1rem;
+}
+
+input{
+  outline: none;
+}
+
+.todo-item:not(:last-child){
+  margin-bottom: 2px;
 }

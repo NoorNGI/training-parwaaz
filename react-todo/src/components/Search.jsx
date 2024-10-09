@@ -1,0 +1,14 @@
+import React from 'react'
+
+function Search() {
+  return (
+    <form className='p-10 pb-5 border-b flex-grow-0'>
+        <div className='w-full flex rounded-full bg-[#edede9]'>
+            <input type="text" placeholder='Add a item...' className='w-[75%] ml-6 py-3 bg-[transparent]'/>
+            <button className='w-[25%] bg-[#d62828] rounded-full text-bold text-white text-sm'>Add</button>
+        </div>
+    </form>
+  )
+}
+
+export default Search
