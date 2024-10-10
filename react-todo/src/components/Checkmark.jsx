@@ -1,5 +1,6 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
+import PropTypes from "prop-types";
 
 function Checkmark({ isCheck }) {
   return (
@@ -14,3 +15,7 @@ function Checkmark({ isCheck }) {
 }
 
 export default Checkmark;
+
+Checkmark.propTypes = {
+  isCheck: PropTypes.bool.isRequired,
+};

@@ -28,3 +28,19 @@ input {
 .todo-item:not(:last-child) {
   margin-bottom: 2px;
 }
+
+.todo-list-container::-webkit-scrollbar {
+  width: 0;
+  transition: all 1s ease;
+  /* height: 10px; */
+}
+
+.todo-list-container:hover::-webkit-scrollbar {
+  width: 5px;
+  /* height: 10px; */
+}
+
+.todo-list-container::-webkit-scrollbar-thumb {
+  background: #d62828; /* Color of the scrollbar thumb */
+  border-radius: 10px;
+}

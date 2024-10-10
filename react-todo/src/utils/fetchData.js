@@ -3,17 +3,22 @@ export const makeHttpRequest = async (id, method = "GET", body, headers) => {
     let data;
 
     if (!id && method === "GET" && !body) {
-      const response = await fetch(`http://localhost:3000/todos`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/todos`
+      );
       data = await response.json();
       data.reverse();
     } else {
-      const response = await fetch(`http://localhost:3000/todos/${id}`, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/todos/${id}`,
+        {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
       data = await response.json();
     }
 

@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import Checkmark from "./Checkmark";
 import { MdDeleteSweep } from "react-icons/md";
 
@@ -8,7 +10,6 @@ function Todo({ todo, markTodoCompleted, onDeleteTodo }) {
       <div
         onClick={() => {
           markTodoCompleted(todo.id);
-          console.log("adf");
         }}
         className="flex gap-8 items-center cursor-pointer"
       >
@@ -28,5 +29,11 @@ function Todo({ todo, markTodoCompleted, onDeleteTodo }) {
     </div>
   );
 }
+
+Todo.propTypes = {
+  todo: PropTypes.object,
+  markTodoCompleted: PropTypes.func,
+  onDeleteTodo: PropTypes.func,
+};
 
 export default Todo;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-function Search({ addTodo }) {
+function AddTodoForm({ addTodo }) {
   const [task, setTask] = useState("");
 
   return (
@@ -14,7 +15,7 @@ function Search({ addTodo }) {
 
         setTask("");
       }}
-      className="p-10 pb-5 border-b flex-grow-0"
+      className="px-10 py-5 border-b flex-grow-0"
     >
       <div className="w-full flex rounded-full bg-[#edede9]">
         <input
@@ -35,4 +36,8 @@ function Search({ addTodo }) {
   );
 }
 
-export default Search;
+AddTodoForm.propTypes = {
+  addTodo: PropTypes.func,
+};
+
+export default AddTodoForm;
