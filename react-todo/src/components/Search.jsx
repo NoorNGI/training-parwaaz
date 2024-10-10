@@ -7,6 +7,9 @@ function Search({ addTodo }) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+
+        if (!task) return;
+
         addTodo(task);
 
         setTask("");
