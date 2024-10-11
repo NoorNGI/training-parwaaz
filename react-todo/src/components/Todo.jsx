@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import Checkmark from "./Checkmark";
 import { MdDeleteSweep } from "react-icons/md";
+import { TodosContext } from "../context/TodosContext";
 
-function Todo({ todo, markTodoCompleted, onDeleteTodo }) {
+function Todo({ todo }) {
+  const { handleMarkTodoCompleted, handleDeleteTodo } =
+    useContext(TodosContext);
   return (
     <div className="todo-item py-4 px-2 flex items-center justify-between hover:rounded-lg hover:bg-[#f4f4f2]">
       <div
         onClick={() => {
-          markTodoCompleted(todo.id);
+          handleMarkTodoCompleted(todo.id);
         }}
         className="flex gap-8 items-center cursor-pointer"
       >
@@ -23,7 +26,7 @@ function Todo({ todo, markTodoCompleted, onDeleteTodo }) {
         </p>
       </div>
       <MdDeleteSweep
-        onClick={() => onDeleteTodo(todo.id)}
+        onClick={() => handleDeleteTodo(todo.id)}
         className="text-[#d62828] text-[20px] cursor-pointer"
       />
     </div>
@@ -32,8 +35,8 @@ function Todo({ todo, markTodoCompleted, onDeleteTodo }) {
 
 Todo.propTypes = {
   todo: PropTypes.object,
-  markTodoCompleted: PropTypes.func,
-  onDeleteTodo: PropTypes.func,
+  // markTodoCompleted: PropTypes.func,
+  // onDeleteTodo: PropTypes.func,
 };
 
 export default Todo;

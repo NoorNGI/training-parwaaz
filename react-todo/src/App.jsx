@@ -1,14 +1,8 @@
 import React from "react";
 import Home from "./pages/Home";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-  Link,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Other from "./pages/Other";
+import { TodosProvider } from "./context/TodosContext";
 
 function App() {
   return (
@@ -28,7 +22,14 @@ function App() {
             </div>
           }
         />
-        <Route path="/app" element={<Home />} />
+        <Route
+          path="/app"
+          element={
+            <TodosProvider>
+              <Home />
+            </TodosProvider>
+          }
+        />
         <Route path="/other" element={<Other />} />
         <Route path="*" element={<div>Page not found</div>} />
       </Routes>

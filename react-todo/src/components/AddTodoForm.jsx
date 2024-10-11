@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
+import { TodosContext } from "../context/TodosContext";
 
 function AddTodoForm({ addTodo }) {
   const [task, setTask] = useState("");
+  const { handleAddTodo } = useContext(TodosContext);
 
   return (
     <form
@@ -11,7 +13,7 @@ function AddTodoForm({ addTodo }) {
 
         if (!task) return;
 
-        addTodo(task);
+        handleAddTodo(task);
 
         setTask("");
       }}

@@ -1,4 +1,5 @@
-export const makeHttpRequest = async (id, method = "GET", body, headers) => {
+export const makeHttpRequest = async (params) => {
+  const { id, method = "GET", body, headers } = params;
   try {
     let data;
 
