@@ -213,7 +213,19 @@ progress {
   border-radius: 100px;
 }
 
-/* CREDIT: https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
+.rotate {
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
 .loader {
   width: 50px;
   height: 24px;
@@ -239,21 +251,4 @@ progress {
   80% {
     background-position: 0% 50%, 50% 50%, 100% 100%;
   }
-}
-
-/* ********** */
-/* First counter example */
-.counter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 6rem;
-}
-
-.counter * {
-  font-size: inherit;
-  padding: 0.8rem;
 }
