@@ -14,8 +14,13 @@ const accountSlice = createSlice({
       state.balance += action.payload;
     },
     withdraw: (state, action) => {
-      if (action.payload > state.balance) return;
       state.balance -= action.paload;
+    },
+    loan: (state, action) => {
+      state.loan = action.payload.loan;
+      state.loanPurpose = action.payload.loanPurpose;
     },
   },
 });
+
+export const accountReducer = accountSlice.reducer;

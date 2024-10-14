@@ -6,7 +6,13 @@ function AccountOperations() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    if (+value < 0) console.log("less than zero.");
+
     setFormState({ ...formState, [name]: value });
+  };
+
+  const handleDeposit = () => {
+    // if()
   };
   return (
     <div className="main">
