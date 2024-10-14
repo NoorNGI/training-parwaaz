@@ -3,7 +3,6 @@ import { useQuiz } from "../context/QuizContext";
 
 function Timer() {
   const { secondsRemaining, dispatch } = useQuiz();
-  console.log(secondsRemaining);
 
   const minutes = Math.floor(secondsRemaining / 60);
   const seconds = secondsRemaining % 60;

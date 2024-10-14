@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import axios from "axios";
 
 const QuizContext = createContext();
 
-const TIME_PER_QUESTION = 1;
+const TIME_PER_QUESTION = 0.5;
 
 const initialState = {
   questions: [],
@@ -111,10 +112,19 @@ function QuizProvider({ children }) {
   };
   ///////////////////
 
+  //   useEffect(() => {
+  //     fetch("http://localhost:8000/questions")
+  //       .then((res) => res.json())
+  //       .then((data) => dispatch({ type: "dataReceived", payload: data }))
+  //       .catch(() => dispatch({ type: "dataFailed" }));
+  //   }, []);
+
   useEffect(() => {
-    fetch("http://localhost:8000/questions")
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
+    axios
+      .get("http://localhost:8000/questions")
+      .then((response) =>
+        dispatch({ type: "dataReceived", payload: response.data })
+      )
       .catch(() => dispatch({ type: "dataFailed" }));
   }, []);
 
@@ -144,8 +154,6 @@ function useQuiz() {
 
   if (context === undefined)
     throw new Error("Component lies outside the quiz context");
-
-  console.log(context);
 
   return context;
 }
