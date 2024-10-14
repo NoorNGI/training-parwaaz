@@ -2,7 +2,13 @@ import React from "react";
 import { useQuiz } from "../context/QuizContext";
 
 function FinishScreen() {
-  const { points, maxPossiblePoints, highscore, handleRestartQuiz } = useQuiz();
+  const {
+    points,
+    maxPossiblePoints,
+    highscore,
+    handleRestartQuiz,
+    handleGoToHome,
+  } = useQuiz();
 
   const percentage = (points / maxPossiblePoints) * 100;
 
@@ -20,9 +26,14 @@ function FinishScreen() {
         {maxPossiblePoints} ({Math.ceil(percentage)}%)
       </p>
       <p className="highscore">(Highscore: {highscore} points)</p>
-      <button className="btn btn-ui" onClick={handleRestartQuiz}>
-        Restart quiz
-      </button>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <button className="btn" onClick={handleGoToHome}>
+          Go to Home
+        </button>
+        <button className="btn" onClick={handleRestartQuiz}>
+          Restart quiz
+        </button>
+      </div>
     </>
   );
 }

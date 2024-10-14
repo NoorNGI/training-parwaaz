@@ -17,7 +17,7 @@ const initialState = {
   secondsRemaining: 0,
 };
 
-function reducer(state, action) {
+function reducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case "dataReceived":
@@ -68,6 +68,12 @@ function reducer(state, action) {
         ...state,
         secondsRemaining: state.secondsRemaining - 1,
       };
+    case "goToHome":
+      return {
+        ...initialState,
+        questions: state.questions,
+        status: "ready",
+      };
 
     default:
       return;
@@ -110,6 +116,10 @@ function QuizProvider({ children }) {
   const handleRestartQuiz = () => {
     dispatch({ type: "restartQuiz" });
   };
+
+  const handleGoToHome = () => {
+    dispatch({ type: "goToHome" });
+  };
   ///////////////////
 
   //   useEffect(() => {
@@ -142,6 +152,7 @@ function QuizProvider({ children }) {
     handleNewAnswer,
     handleNextQuestion,
     handleRestartQuiz,
+    handleGoToHome,
 
     dispatch,
   };
