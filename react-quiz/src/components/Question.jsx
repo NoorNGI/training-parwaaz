@@ -1,6 +1,16 @@
 import React from "react";
+import { useQuiz } from "../context/QuizContext";
+import Timer from "./Timer";
 
-function Question({ question, dispatch, answer, numOfQuestions, curQuestion }) {
+function Question({ question }) {
+  const {
+    answer,
+    numOfQuestions,
+    curQuestion,
+    handleNewAnswer,
+    handleNextQuestion,
+  } = useQuiz();
+
   const hasAnswered = answer !== null;
   return (
     <div>
@@ -16,7 +26,7 @@ function Question({ question, dispatch, answer, numOfQuestions, curQuestion }) {
                   : "wrong"
                 : ""
             }`}
-            onClick={() => dispatch({ type: "newAnswer", payload: index })}
+            onClick={() => handleNewAnswer(index)}
             disabled={hasAnswered}
           >
             {option}
@@ -24,17 +34,11 @@ function Question({ question, dispatch, answer, numOfQuestions, curQuestion }) {
         ))}
       </div>
       {hasAnswered && (
-        <button
-          className="btn btn-ui"
-          onClick={() => {
-            if (curQuestion + 1 === numOfQuestions)
-              dispatch({ type: "finishQuiz" });
-            else dispatch({ type: "nextQuestion" });
-          }}
-        >
+        <button className="btn btn-ui" onClick={handleNextQuestion}>
           {curQuestion + 1 === numOfQuestions ? "Finish" : "Next"}
         </button>
       )}
+      <Timer />
     </div>
   );
 }
