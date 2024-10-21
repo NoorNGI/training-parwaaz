@@ -1,10 +1,10 @@
 import React, { useEffect, useState, createContext } from "react";
 import { v4 as uuid } from "uuid";
-import { makeHttpRequest } from "../utils/fetchData";
+import { httpRequest } from "../utils/api";
 
-const TodosContext = createContext();
+const Context = createContext();
 
-function TodosProvider({ children }) {
+function Provider({ children }) {
   const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -12,7 +12,9 @@ function TodosProvider({ children }) {
     const fetch = async () => {
       try {
         setIsLoading(true);
-        const data = await makeHttpRequest({});
+        const data = await httpRequest("/todos", "GET");
+
+        data.reverse();
 
         setTodos(data);
       } catch (err) {
@@ -31,13 +33,7 @@ function TodosProvider({ children }) {
       isCompleted: false,
     };
 
-    const params = {
-      id: "",
-      method: "POST",
-      body: newTask,
-    };
-
-    const data = await makeHttpRequest(params);
+    const data = await httpRequest(`/todos/`, "POST", newTask);
 
     if (!data) return;
 
@@ -49,13 +45,9 @@ function TodosProvider({ children }) {
 
     completedTodo.isCompleted = !completedTodo.isCompleted;
 
-    const params = {
-      id,
-      method: "PATCH",
-      body: { isCompleted: completedTodo.isCompleted },
-    };
+    let body = { isCompleted: completedTodo.isCompleted };
 
-    const data = await makeHttpRequest(params);
+    const data = await httpRequest(`/todos/${id}`, "PATCH", body);
 
     if (!data) return;
 
@@ -72,7 +64,7 @@ function TodosProvider({ children }) {
       id,
       method: "DELETE",
     };
-    const data = await makeHttpRequest(params);
+    const data = await httpRequest(`/todos/${id}`, "DELETE");
 
     if (!data) return;
 
@@ -87,9 +79,7 @@ function TodosProvider({ children }) {
     handleDeleteTodo,
   };
 
-  return (
-    <TodosContext.Provider value={value}>{children}</TodosContext.Provider>
-  );
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 
-export { TodosProvider, TodosContext };
+export { Provider, Context };

@@ -1,22 +1,24 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { TodosContext } from "../context/TodosContext";
+import { Context } from "../context/Context";
 
 function AddTodoForm({ addTodo }) {
   const [task, setTask] = useState("");
-  const { handleAddTodo } = useContext(TodosContext);
+  const { handleAddTodo } = useContext(Context);
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+
+    if (!task) return;
+
+    handleAddTodo(task);
+
+    setTask("");
+  };
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-
-        if (!task) return;
-
-        handleAddTodo(task);
-
-        setTask("");
-      }}
+      onSubmit={handleSubmitForm}
       className="px-10 py-5 border-b flex-grow-0"
     >
       <div className="w-full flex rounded-full bg-[#edede9]">

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 // import PropTypes from "prop-types";
 import Todo from "./Todo";
-import { TodosContext } from "../context/TodosContext";
+import { Context } from "../context/Context";
 
 function TodoList() {
-  const { isLoading, todos } = useContext(TodosContext);
+  const { isLoading, todos } = useContext(Context);
 
   if (isLoading)
     return (
@@ -15,7 +15,7 @@ function TodoList() {
       </div>
     );
 
-  if (!todos.length)
+  if (!todos?.length)
     return (
       <div className="h-[100%] flex items-center justify-center px-8">
         <h1 className="text-3xl text-slate-500 font-bold text-center">
