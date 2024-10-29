@@ -38,10 +38,6 @@ function reducer(state, action) {
           payload === question.correctOption
             ? state.points + question.points
             : state.points,
-        // points:
-        //   state.answer === question.correctOption
-        //     ? state.answer + question.points
-        //     : state.answer,
       };
     }
     case "nextQuestion":

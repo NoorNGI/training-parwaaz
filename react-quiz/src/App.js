@@ -9,7 +9,7 @@ import FinishScreen from "./components/FinishScreen";
 import { useQuiz } from "./context/QuizContext";
 
 function App() {
-  const { status, questions, curQuestion } = useQuiz();
+  const { status } = useQuiz();
 
   return (
     <div className="app">
@@ -22,7 +22,7 @@ function App() {
         {status === "active" && (
           <>
             <Progress />
-            <Question question={questions[curQuestion]} />
+            <Question />
           </>
         )}
         {status === "finished" && <FinishScreen />}

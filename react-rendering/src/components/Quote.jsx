@@ -8,15 +8,18 @@ function Quote() {
   const fetchQuote = () => {
     setIsLoading(true);
 
-    fetch("https://api.quotable.io/quotes/random")
+    fetch("https://quoteslate.vercel.app/api/quotes/random")
       .then((res) => res.json())
       .then((data) => {
-        setQuote(data[0]);
+        setQuote(data);
       })
-      .catch((err) => setError(err.message))
+      .catch((err) => {
+        setError(err.message);
+      })
       .finally(() => setIsLoading(false));
   };
 
+  // To show the mounting phase and unmounting phase of the component....
   useEffect(() => {
     console.log("Quote: Functional Component mounted...");
 
@@ -25,14 +28,19 @@ function Quote() {
     return () => console.log("Quote: Functional Component will unmount...");
   }, []);
 
+  // To show the updating / re-rendering phase of the component....
+  useEffect(() => {
+    console.log("Quote: Functional Component updated...");
+  }, [quote]);
+
   if (isLoading) return <p>Loading...</p>;
 
-  if (error) return <p>Error</p>;
+  if (error) return <p>Error!</p>;
 
   return (
     <div>
       <div>
-        <q className="quote">{quote.content}</q>
+        <q className="quote">{quote.quote}</q>
       </div>
       <button onClick={fetchQuote}>New Quote</button>
     </div>

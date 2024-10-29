@@ -18,6 +18,8 @@ function App() {
     return () => clearTimeout(timeout);
   }, []);
 
+  // return <>{isLoading ? <LoaderFull /> : <h1>No Loader...</h1>}</>;
+
   if (isLoading) return <LoaderFull />;
 
   return (

@@ -1,17 +1,27 @@
 import React, { useReducer } from "react";
-import CustomerDetails from "./components/CustomerDetails";
-import AccountOperations from "./components/AccountOperations";
-import AccountBalance from "./components/AccountBalance";
+import Customer from "./features/customer/Customer";
+import AccountOperations from "./features/account/AccountOperations";
+import AccountBalance from "./features/account/AccountBalance";
+import RegisterCustomer from "./features/customer/RegisterCustomer";
+import "./features/account/accountSlice";
+import "./features/customer/customerSlice";
+import { useSelector } from "react-redux";
 
 function App() {
-  // const [state, dispatch] = useReducer(accountReducer, accountInitialState);
-
+  const customer = useSelector((store) => store.customer.fullName);
+  console.log(customer);
   return (
     <div>
       <h1 className="heading">🏦 The React Bank ⚛️</h1>
-      <AccountBalance />
-      <CustomerDetails />
-      <AccountOperations />
+      {!customer.length ? (
+        <RegisterCustomer />
+      ) : (
+        <>
+          <AccountBalance />
+          <Customer />
+          <AccountOperations />
+        </>
+      )}
     </div>
   );
 }

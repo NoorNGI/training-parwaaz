@@ -2,14 +2,17 @@ import React from "react";
 import { useQuiz } from "../context/QuizContext";
 import Timer from "./Timer";
 
-function Question({ question }) {
+function Question() {
   const {
+    questions,
     answer,
     numOfQuestions,
     curQuestion,
     handleNewAnswer,
     handleNextQuestion,
   } = useQuiz();
+
+  const question = questions[curQuestion];
 
   const hasAnswered = answer !== null;
   return (
