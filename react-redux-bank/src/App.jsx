@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const customer = useSelector((store) => store.customer.fullName);
-  console.log(customer);
+
   return (
     <div>
       <h1 className="heading">🏦 The React Bank ⚛️</h1>

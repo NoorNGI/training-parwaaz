@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { deposit, withdraw } from "./accountSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deposit, payLoan, requestLoan, withdraw } from "./accountSlice";
 
 function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState("");
@@ -9,6 +9,10 @@ function AccountOperations() {
   const [loanPurpose, setLoanPurpose] = useState("");
 
   const dispatch = useDispatch();
+
+  const { loan: requestedLoan, loanPurpose: lpurpose } = useSelector(
+    (store) => store.account
+  );
 
   const handleDeposit = () => {
     if (depositAmount < 0 || !depositAmount)
@@ -20,15 +24,28 @@ function AccountOperations() {
   };
 
   const handleWithdraw = () => {
-    if (depositAmount < 0 || !depositAmount)
+    if (withdrawAmount < 0 || !withdrawAmount)
       return alert("Withdraw amount should be greater than 0");
 
     dispatch(withdraw(withdrawAmount));
 
     setWithdrawAmount("");
   };
-  const handleRequestLoan = () => {};
-  const handlePayLoan = () => {};
+  const handleRequestLoan = () => {
+    if (loanAmount < 0 || !loanAmount || !loanPurpose.length)
+      return alert(
+        "Loan amount should be greater than 0, also give the loan purpose."
+      );
+
+    dispatch(requestLoan(loanAmount, loanPurpose));
+
+    setLoanAmount("");
+    setLoanPurpose("");
+  };
+
+  const handlePayLoan = () => {
+    dispatch(payLoan());
+  };
 
   return (
     <>
@@ -73,6 +90,7 @@ function AccountOperations() {
             name="loan"
             value={loanAmount}
             onChange={(e) => setLoanAmount(Number(e.target.value))}
+            disabled={requestedLoan > 0}
           />
           <input
             className="operation-input"
@@ -81,16 +99,23 @@ function AccountOperations() {
             name="loanPurpose"
             value={loanPurpose}
             onChange={(e) => setLoanPurpose(e.target.value)}
+            disabled={requestedLoan > 0}
           />
-          <button className="btn" onClick={handleRequestLoan}>
+          <button
+            className="btn"
+            onClick={handleRequestLoan}
+            disabled={requestedLoan > 0}
+          >
             Request
           </button>
         </div>
 
-        {false && (
+        {requestedLoan > 0 && (
           <>
             <div className="operation-row">
-              <p>you have to pay loan back</p>
+              <p>
+                you have taken a loan of ${requestedLoan} for "{lpurpose}"
+              </p>
               <button className="btn" onClick={handlePayLoan}>
                 Pay Loan
               </button>
