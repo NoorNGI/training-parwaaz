@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Synthetic Events</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: blanchedalmond;
+        height: 100vh;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .heading {
+        margin-bottom: 40px;
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 100rem;
+        outline: none;
+        border: 1px solid #007bff;
+        background-color: #007bff;
+        color: #ffffff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        word-spacing: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">JAVASCRIPT Native Events</h1>
+      <button class="btn">Click Me</button>
+    </div>
+
+    <script>
+      const btnElement = document.querySelector(".btn");
+      console.log(btnElement);
+
+      btnElement.addEventListener("click", () => {
+        alert("button clicked");
+      });
+    </script>
+  </body>
+</html>
