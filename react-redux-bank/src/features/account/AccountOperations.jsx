@@ -7,20 +7,24 @@ function AccountOperations() {
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [loanAmount, setLoanAmount] = useState("");
   const [loanPurpose, setLoanPurpose] = useState("");
+  const [currency, setCurrency] = useState("USD");
 
   const dispatch = useDispatch();
 
-  const { loan: requestedLoan, loanPurpose: lpurpose } = useSelector(
-    (store) => store.account
-  );
+  const {
+    loan: requestedLoan,
+    loanPurpose: lpurpose,
+    loading,
+  } = useSelector((store) => store.account);
 
   const handleDeposit = () => {
     if (depositAmount < 0 || !depositAmount)
       return alert("Deposit amount should be greater than 0");
 
-    dispatch(deposit(depositAmount));
+    dispatch(deposit(depositAmount, currency));
 
     setDepositAmount("");
+    setCurrency("USD");
   };
 
   const handleWithdraw = () => {
@@ -31,6 +35,7 @@ function AccountOperations() {
 
     setWithdrawAmount("");
   };
+
   const handleRequestLoan = () => {
     if (loanAmount < 0 || !loanAmount || !loanPurpose.length)
       return alert(
@@ -57,12 +62,21 @@ function AccountOperations() {
             className="operation-input"
             placeholder="Enter amount"
             type="number"
-            name="deposit"
             value={depositAmount}
             onChange={(e) => setDepositAmount(Number(e.target.value))}
           />
+
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            <option value="USD">US Dollar</option>
+            <option value="EUR">Euro</option>
+            <option value="GBP">British Pound</option>
+          </select>
+
           <button className="btn" onClick={handleDeposit}>
-            Deoposit
+            {loading ? "converting..." : "Deposit"}
           </button>
         </div>
 

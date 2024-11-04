@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS Synthetic Events</title>
+    <title>JS Native Events</title>
 
     <style>
       * {
@@ -58,11 +58,16 @@
 
     <script>
       const btnElement = document.querySelector(".btn");
-      console.log(btnElement);
 
-      btnElement.addEventListener("click", () => {
-        alert("button clicked");
-      });
+      const eventHandler = (e) => {
+        alert("event fired");
+
+        console.log(e.target, "-----event target");
+        console.log(e.type, "-----event type");
+        console.log(e);
+      };
+
+      btnElement.addEventListener("click", eventHandler);
     </script>
   </body>
 </html>
