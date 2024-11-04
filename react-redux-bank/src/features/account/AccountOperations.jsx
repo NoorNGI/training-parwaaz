@@ -43,6 +43,7 @@ function AccountOperations() {
       );
 
     dispatch(requestLoan(loanAmount, loanPurpose));
+    // dispatch(requestLoan(loanAmount));
 
     setLoanAmount("");
     setLoanPurpose("");
