@@ -20,6 +20,7 @@ function AccountOperations() {
   const handleDeposit = () => {
     if (depositAmount < 0 || !depositAmount)
       return alert("Deposit amount should be greater than 0");
+    console.log(currency);
 
     dispatch(deposit(depositAmount, currency));
 
