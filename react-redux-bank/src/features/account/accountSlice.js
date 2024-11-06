@@ -10,9 +10,7 @@ const initialState = {
 
 export const deposit = createAsyncThunk(
   "account/deposit",
-  async (amount, currency) => {
-    console.log(currency, amount);
-
+  async ({ amount, currency }) => {
     try {
       if (currency === "USD") return amount;
       const res = await fetch(
@@ -32,15 +30,13 @@ export const deposit = createAsyncThunk(
   }
 );
 
-console.log(deposit.caller);
-
 const accountSlice = createSlice({
   name: "account",
   initialState,
   reducers: {
-    deposit: (state, action) => {
-      state.balance += action.payload;
-    },
+    // deposit: (state, action) => {
+    //   state.balance += action.payload;
+    // },
     withdraw: (state, action) => {
       if (state.balance < action.payload) return state;
 
@@ -64,14 +60,14 @@ const accountSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase("pending", (state, action) => {
+      .addCase(deposit.pending, (state, action) => {
         state.loading = true;
       })
-      .addCase("fulfilled", (state, action) => {
+      .addCase(deposit.fulfilled, (state, action) => {
         state.balance += action.payload;
         state.loading = false;
       })
-      .addCase("rejected", (state, action) => {
+      .addCase(deposit.rejected, (state, action) => {
         state.loading = false;
       });
   },

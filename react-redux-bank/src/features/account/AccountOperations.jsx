@@ -22,7 +22,8 @@ function AccountOperations() {
       return alert("Deposit amount should be greater than 0");
     console.log(currency);
 
-    dispatch(deposit(depositAmount, currency));
+    // dispatch(deposit(depositAmount, currency));
+    dispatch(deposit({ amount: depositAmount, currency }));
 
     setDepositAmount("");
     setCurrency("USD");
